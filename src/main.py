@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the cleaned dataset
-df = pd.read_csv("cleaned_ev_stations.csv")
+df = pd.read_csv("data/cleaned_ev_stations.csv")
 
 # Plot charging station locations
 plt.figure(figsize=(10, 7))

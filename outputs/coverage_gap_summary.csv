@@ -1,0 +1,9 @@
+Metric,Value
+Number of charging stations,1331.0
+Mean nearest-other-station distance (km),7.336768966415165
+Median nearest-other-station distance (km),1.0040771486420719
+Maximum nearest-other-station distance (km),1150.0871057670977
+Grid points inside station convex hull,9943.0
+Grid points beyond 25 km,8954.0
+Percentage of evaluated grid points beyond 25 km,90.05
+Distance threshold (km),25.0

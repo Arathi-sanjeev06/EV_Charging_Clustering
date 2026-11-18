@@ -1,126 +1,138 @@
-# Spatial Clustering of EV Charging Stations to Find Coverage Gaps
+# Spatial Clustering of EV Charging Stations to Identify Coverage Gaps in India
 
 ## 1. Project Overview
 
-Electric vehicles (EVs) are an important part of the transition towards cleaner transportation. However, the availability of charging infrastructure is not evenly distributed across geographical areas.
+Electric vehicles (EVs) play an important role in the transition towards sustainable transportation. However, the geographical distribution of EV charging infrastructure is uneven, potentially creating accessibility challenges for EV users.
 
-This project uses spatial clustering and distance-based analysis to study the distribution of electric vehicle charging stations in India. It applies K-Means and Hierarchical Clustering to identify spatial patterns and uses nearest-neighbour distances and grid-based analysis to explore potential charging infrastructure coverage gaps.
+This project applies spatial clustering and geographic distance analysis to study the distribution of EV charging stations across India. K-Means and Agglomerative Hierarchical Clustering are used to identify geographical patterns, while nearest-neighbour and grid-based distance analysis are used to investigate potential charging infrastructure gaps.
 
-The project supports **United Nations Sustainable Development Goals (SDGs) 7 and 11**, which focus on affordable and clean energy and sustainable cities and communities.
+The project supports UN Sustainable Development Goals SDG 7 (Affordable and Clean Energy) and SDG 11 (Sustainable Cities and Communities).
 
-## 2. Objectives
+## 2. Project Objectives
 
-The main objectives of this project are:
+- Examine the geographical distribution of EV charging stations.
+- Apply K-Means and Hierarchical Clustering to geographical coordinates.
+- Determine suitable cluster counts using the Elbow Method and Silhouette Score.
+- Compare the performance of both clustering algorithms.
+- Calculate nearest-neighbour distances using the Haversine formula.
+- Identify potential areas with limited proximity to recorded charging stations.
+- Conduct state-wise analysis of station distribution and distances.
 
-- To examine the geographical distribution of EV charging stations in India.
-- To apply K-Means and Hierarchical Clustering to identify spatial groupings.
-- To compare clustering methods using silhouette scores.
-- To calculate nearest-station distances and identify locations that may be underserved.
-- To conduct state-wise analysis to explore differences in station distribution.
-- To visualize spatial patterns and potential coverage gaps.
+## 3. Dataset Description
 
-## 3. Dataset
+The project uses the Electric Vehicle Charging Stations in India dataset obtained from Kaggle.
 
-The project uses the *Electric Vehicle Charging Stations in India* dataset obtained from Kaggle.
-
-The dataset contains information such as station name, state, city, address, latitude, longitude, and station type.
+The dataset contains station names, states, cities, addresses, latitude, longitude and station types.
 
 ### Data preprocessing
 
-The following preprocessing steps were performed:
+The original dataset contained 1,547 records. The cleaned dataset contains 1,331 records.
 
-- Converted latitude and longitude values into numeric format.
-- Removed exact duplicate records.
-- Removed records with missing or invalid coordinates.
-- Applied geographical coordinate bounds to exclude invalid locations.
-- Standardized selected state-name variations for state-wise analysis.
+The preprocessing included:
+- Converting geographic coordinates into numeric values.
+- Removing duplicate records.
+- Handling missing and invalid coordinates.
+- Checking geographical coordinate ranges.
+- Standardizing selected state and region names for regional analysis.
 
-After preprocessing, **1,331 charging station records** remained in the cleaned dataset.
+The supplied cleaned dataset is stored at:
 
-The original dataset contained 1,547 records. The cleaned dataset is stored in `data/cleaned_ev_stations.csv`.
+`data/cleaned_ev_stations.csv`
+
+The original dataset is stored at:
+
+`data/ev.csv`
 
 ## 4. Methodology
 
 ### 4.1 Exploratory Data Analysis
 
-The geographical distribution of charging stations was examined using visualizations and state-wise station counts.
+Geographical coordinates and state-wise station counts were examined to understand the distribution of recorded EV charging stations.
 
 ### 4.2 K-Means Clustering
 
-K-Means was applied to latitude and longitude coordinates to identify spatial clusters. Different values of K were evaluated using silhouette scores to compare cluster separation and cohesion.
+K-Means was applied to standardized latitude and longitude coordinates.
+
+The number of clusters was evaluated for K values ranging from 2 to 10 using:
+- Elbow Method (Inertia)
+- Silhouette Score
+
+The best silhouette score was obtained at K = 4.
 
 ### 4.3 Hierarchical Clustering
 
-Hierarchical Clustering was used as a second approach to examine geographical groupings. Its results were compared with those of K-Means for cluster counts from 2 to 10.
+Agglomerative Hierarchical Clustering was implemented using Ward linkage.
 
-### 4.4 Coverage-Gap Analysis
+Different cluster counts were evaluated using Silhouette Scores. A dendrogram was also generated using a sample of station coordinates to illustrate the hierarchical merging process.
 
-Nearest-neighbour distances were calculated using geographic distance calculations based on the haversine formula. A spatial grid was also used to estimate distances from sampled locations to the nearest charging station.
+### 4.4 Clustering Comparison
 
-A 25 km distance threshold was used as an exploratory indicator of potentially distant charging infrastructure. This threshold is an analytical choice for this project, not an official accessibility standard.
+Both algorithms were evaluated using the same standardized coordinate representation and cluster counts ranging from 2 to 10.
 
-### 4.5 State-Wise Analysis
+Their silhouette scores were compared to identify the better-performing configuration among those tested.
 
-Station counts and nearest-neighbour distances were summarized by state or recorded region to examine differences in the spatial distribution of charging stations.
+### 4.5 Geographic Distance Analysis
 
-## 5. Results and Key Findings
+The Haversine formula was used with a BallTree to calculate the great-circle distance between geographical coordinates.
 
-### 5.1 Clustering Comparison
+The analysis included:
+- Distance from each station to its nearest other station.
+- Grid-point distance to the nearest recorded station.
+- State-wise summaries of nearest-neighbour distances.
 
-The best silhouette scores among the tested cluster counts were:
+A 25 km threshold was selected as an exploratory indicator of potentially distant charging infrastructure. It is not an official accessibility standard.
 
-| Method | Number of clusters | Silhouette score |
+The grid was restricted to the convex hull of recorded station coordinates. Therefore, the results represent sampled locations within this boundary, not a complete assessment of India's land area or population accessibility.
+
+## 5. Results and Findings
+
+### 5.1 Clustering Performance
+
+| Algorithm | Number of clusters | Silhouette Score |
 |---|---:|---:|
 | K-Means | 4 | 0.6469 |
-| Hierarchical Clustering | 4 | 0.6219 |
+| Hierarchical (Ward) | 4 | 0.6219 |
 
-K-Means achieved the higher silhouette score among the tested configurations. This indicates better cluster separation under the chosen representation and evaluation method; it does not establish that K-Means is universally superior for all spatial datasets.
+K-Means achieved the higher silhouette score among the tested configurations. This indicates better separation under the selected coordinate representation and evaluation method.
 
 ### 5.2 Station Distribution
 
-The cleaned dataset contained 1,331 station records. Maharashtra had the highest station count in the state-wise summary, with 225 records.
+The cleaned dataset contains 1,331 recorded charging stations.
 
-Among recorded states with at least 20 stations, Odisha had a mean nearest-neighbour distance of approximately 21.14 km, followed by Rajasthan at approximately 15.44 km. These results suggest that station spacing varies considerably across the dataset.
+Maharashtra has the highest station count in the state-wise analysis, with 225 records.
 
-### 5.3 Potential Coverage Gaps
+The distribution indicates that recorded charging infrastructure is concentrated in certain regions, while other regions contain fewer recorded stations.
 
-The nearest-neighbour analysis produced a median distance of approximately 1.00 km and a mean distance of approximately 7.34 km between a station and its nearest other station.
+### 5.3 Nearest-Neighbour Analysis
 
-Some stations had very large nearest-neighbour distances. Such cases may indicate sparse local infrastructure, geographic separation, data-quality issues, or isolated locations that require further investigation.
+The nearest-other-station distance analysis produced:
 
-The grid-based analysis also identified sampled locations more than 25 km from a recorded station. These locations are potential areas for further investigation, not confirmed areas without EV charging access.
+| Metric | Result |
+|---|---:|
+| Number of stations | 1,331 |
+| Mean distance | 7.34 km |
+| Median distance | 1.00 km |
+| Maximum distance | 1,150.09 km |
 
-## 6. Visualizations and Outputs
+The large maximum distance indicates that some recorded stations are geographically isolated from other stations in the dataset.
 
-The project includes visualizations and CSV result tables.
+### 5.4 Potential Coverage Gaps
 
-### Figures
+The grid-based analysis produced:
 
-Stored in `outputs/figures/`:
+| Metric | Result |
+|---|---:|
+| Grid points evaluated | 9,943 |
+| Points beyond 25 km | 8,954 |
+| Percentage beyond 25 km | 90.05% |
+| Median distance | 102.27 km |
+| Maximum distance | 708.03 km |
 
-- Station distribution map
-- K-Means elbow-method plot
-- Silhouette-score comparison
-- K-Means cluster visualization
-- Hierarchical clustering visualization
-- Hierarchical dendrogram
-- Coverage-gap map
-- State-wise station-count chart
-- State-wise median nearest-distance chart
+These results identify sampled geographical locations that are more than 25 km from a recorded charging station.
 
-### Tables
+The percentage applies only to the evaluated grid points. It must not be interpreted as the percentage of India's population or land area without charging access.
 
-Stored in `outputs/tables/`:
-
-- Clustering evaluation results
-- K-Means and Hierarchical Clustering comparison
-- Cluster assignments
-- Coverage-gap grid results
-- Coverage-gap summary
-- State-wise station counts and distance summaries
-- Nearest-neighbour distance results
-
-## 7. Technologies Used
+## 6. Technologies Used
 
 - Python
 - Pandas
@@ -129,7 +141,7 @@ Stored in `outputs/tables/`:
 - Scikit-learn
 - SciPy
 
-## 8. Project Structure
+## 7. Project Structure
 
 ```text
 EV_Charging_Clustering/
@@ -137,80 +149,81 @@ EV_Charging_Clustering/
 │   ├── ev.csv
 │   └── cleaned_ev_stations.csv
 ├── outputs/
-│   ├── figures/
-│   └── tables/
 ├── src/
+│   ├── main.py
 │   ├── kmeans_clustering.py
 │   ├── hierarchical_clustering.py
-│   ├── coverage_gap_analysis.py
-│   ├── state_wise_analysis.py
 │   ├── compare_clustering.py
-│   └── main.py
+│   ├── coverage_gap_analysis.py
+│   └── state_wise_analysis.py
 ├── .gitignore
-├── requirements.txt
-└── README.md
+├── Requirements.txt
+├── README.md
+└── EV_charging_stations_report.pdf
 ```
 
-## 9. How to Run the Project
+## 8. How to Run the Project
 
-### Prerequisites
+### Install dependencies
 
-Install Python and the required libraries.
-
-From the project root directory, install dependencies with:
+From the project root directory, run:
 
 ```bash
-pip install -r requirements.txt
+pip install -r Requirements.txt
 ```
 
-Run the analysis scripts using:
+### Execute the analysis scripts
 
 ```bash
+python src/main.py
 python src/kmeans_clustering.py
 python src/hierarchical_clustering.py
+python src/compare_clustering.py
 python src/coverage_gap_analysis.py
 python src/state_wise_analysis.py
-python src/compare_clustering.py
 ```
 
-On Windows, you may use `py` instead of `python`, for example:
+On Windows, `py` can be used instead of `python`.
 
-```powershell
-py src/compare_clustering.py
-```
+Run commands from the project root directory because the scripts use relative paths.
 
-Run each script from the project root directory so that relative file paths resolve correctly.
+The cleaned dataset is supplied in the data folder. The analysis scripts generate their respective CSV tables and visualizations in the outputs folder.
 
-The scripts may regenerate the associated result tables and figures.
+## 9. Limitations
 
-## 10. Limitations
+- The dataset may not contain every operational EV charging station in India.
+- Incorrect or inconsistent geographical coordinates may affect the analysis.
+- Standardized latitude and longitude with Euclidean-based clustering do not account for Earth's curvature in the same way as Haversine distance.
+- Haversine distance measures straight-line distance rather than actual road-network travel distance.
+- The 25 km threshold is an exploratory analytical choice.
+- Grid-based estimates depend on the selected grid resolution and convex-hull boundary.
+- The analysis does not incorporate population density, EV ownership, charging capacity, station reliability or traffic patterns.
+- State-wise results may be affected by inconsistent region names and small sample sizes.
 
-- The dataset represents recorded charging stations and may not include every operational station in India.
-- Geographic coordinates and station attributes may contain errors or inconsistencies.
-- Straight-line geographic distance does not represent road-network travel distance or actual travel time.
-- Clustering latitude and longitude identifies spatial patterns but does not directly measure population demand, charging capacity, station reliability, or EV ownership.
-- Grid-based coverage estimates depend on the selected grid, geographical boundary, and distance threshold.
-- State-wise summaries may be affected by small sample sizes, duplicated coordinates, and inconsistent regional labels.
+Therefore, the findings should be interpreted as exploratory spatial analysis rather than a definitive measurement of EV charging accessibility.
 
-Therefore, the findings should be interpreted as an exploratory spatial analysis rather than a definitive assessment of EV charging accessibility.
+## 10. Sustainable Development Goals
 
-## 11. Sustainable Development Goals
+**SDG 7 – Affordable and Clean Energy**
 
-This project relates to:
+The project supports research into the geographical availability of infrastructure required for electric mobility.
 
-- **SDG 7 — Affordable and Clean Energy:** Supporting the study of infrastructure needed for electric mobility.
-- **SDG 11 — Sustainable Cities and Communities:** Exploring the geographical distribution of charging infrastructure to inform future planning.
+**SDG 11 – Sustainable Cities and Communities**
 
-## 12. Conclusion
+The project examines spatial inequalities in charging infrastructure and identifies areas that may require further investigation.
 
-This project demonstrates how spatial clustering, nearest-neighbour distance calculations, and geographical visualization can be used to examine the distribution of EV charging stations in India.
+## 11. Conclusion
 
-The comparison of clustering methods identifies K-Means with four clusters as the best-performing configuration among those tested using silhouette scores. State-wise summaries and distance-based analysis highlight substantial variation in station spacing and identify locations that may warrant further investigation.
+This project demonstrates the application of unsupervised machine learning and geographic distance analysis to examine EV charging infrastructure distribution in India.
 
-Future work could incorporate population density, EV registrations, road networks, charging capacity, station operating status, and travel-time analysis to produce a more realistic assessment of charging accessibility.
+K-Means achieved the highest silhouette score among the evaluated configurations at four clusters, while Hierarchical Clustering provided a second perspective on geographical grouping.
 
-## Data Source
+Nearest-neighbour and grid-based distance analysis highlighted substantial variations in the proximity of recorded charging stations.
 
-The dataset was obtained from Kaggle: *Electric Vehicle Charging Stations in India*.
+The findings can support preliminary infrastructure planning. Future research could improve the analysis by incorporating population density, road networks, EV registrations, charging capacity and operational station data.
 
-Please refer to the original dataset page for source information and licence details.
+## 12. Data Source
+
+Electric Vehicle Charging Stations in India dataset, obtained from Kaggle.
+
+The original dataset source and licence should be consulted for attribution and usage conditions.

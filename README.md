@@ -251,3 +251,10 @@ The original dataset source and licence should be consulted for attribution and 
 ```bash
 pip install -r Requirements.txt
 python src/main.py
+## 3. Modelling & Validation
+- **Models Implemented:** 
+  - **K-Means Clustering:** Evaluated for $k = 2$ to $10$ using the Elbow Method and Silhouette Scores (`outputs/figures/elbow_method.png`, `outputs/figures/silhouette_scores.png`)[cite: 2].
+  - **Hierarchical Clustering:** Performed agglomerative clustering and plotted dendrograms (`outputs/figures/hierarchical_dendrogram.png`)[cite: 2].
+- **Validation Metrics:** 
+  - Compared clustering models using silhouette coefficients and cluster inertia stored in `outputs/tables/clustering_method_comparison.csv`[cite: 2].
+  - Selected the optimal cluster count based on peak silhouette score performance.

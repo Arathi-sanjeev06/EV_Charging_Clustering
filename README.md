@@ -227,3 +227,27 @@ The findings can support preliminary infrastructure planning. Future research co
 Electric Vehicle Charging Stations in India dataset, obtained from Kaggle.
 
 The original dataset source and licence should be consulted for attribution and usage conditions.
+# EV Charging Station Clustering & Coverage Gap Analysis
+
+## 1. Problem Framing & Objective
+- **Objective:** To perform spatial clustering of Electric Vehicle (EV) charging stations and identify regional coverage gaps to optimize future infrastructure planning.
+- **Significance:** Helps policymakers and stakeholders determine high-density clusters versus underserved desert regions.
+
+## 2. Exploratory Data Analysis (EDA)
+- **Data Overview:** Cleaned station data from `cleaned_ev_stations.csv` containing geographical coordinates and state distributions[cite: 2].
+- **Key Visualizations & Insights:**
+  - **Station Distribution:** Visualizes the geographic spread across regions[cite: 2].
+    ![Station Distribution](outputs/figures/station_distribution.png)
+  - **State-wise Counts:** Highlights disparities in infrastructure availability between states[cite: 2].
+    ![State Station Counts](outputs/figures/state_station_counts.png)
+  - **Median Distance:** Evaluates accessibility gaps per state[cite: 2].
+    ![State Median Distance](outputs/figures/state_median_distance.png)
+
+## 3. Methodology & Preprocessing
+- **Data Cleaning:** Handled missing spatial coordinates and removed outliers to prevent distortion in spatial clustering.
+- **Clustering Approach:** Compared K-Means and Hierarchical Clustering using silhouette scores and elbow methods (`outputs/figures/elbow_method.png`, `outputs/figures/silhouette_scores.png`)[cite: 2].
+
+## 4. How to Run
+```bash
+pip install -r Requirements.txt
+python src/main.py

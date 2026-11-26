@@ -1,0 +1,2 @@
+reference,K,runs,mean_silhouette,std_silhouette
+Randomly permuted K-Means labels,5,30,-0.043744507153909935,0.01911162493632021

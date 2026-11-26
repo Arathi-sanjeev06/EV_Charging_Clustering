@@ -1,0 +1,45 @@
+state_cleaned,state_mapping_status,Station_Count
+Maharashtra,verified_name_format,220
+Tamil Nadu,corrected_spelling,140
+Karnataka,verified_name_format,124
+Delhi,verified_name_format,123
+Kerala,verified_name_format,78
+Uttar Pradesh,verified_name_format,76
+Telangana,verified_name_format,66
+Gujarat,verified_name_format,60
+Andhra Pradesh,corrected_spelling,59
+Haryana,verified_name_format,56
+Rajasthan,verified_name_format,55
+Delhi NCR,verified_name_format,48
+West Bengal,verified_name_format,43
+Odisha,verified_name_format,26
+Punjab,corrected_spelling,24
+Uttarakhand,verified_name_format,20
+Jharkhand,verified_name_format,15
+Madhya Pradesh,verified_name_format,15
+Chhattisgarh,verified_name_format,11
+Goa,verified_name_format,8
+Jammu and Kashmir,corrected_spelling,7
+Telangana,corrected_spelling,6
+Bihar,verified_name_format,6
+Himachal Pradesh,verified_name_format,6
+Chhattisgarh,corrected_spelling,6
+Assam,verified_name_format,6
+Maharashtra,corrected_spelling,5
+Uttarakhand,corrected_spelling,3
+West Bengal,corrected_spelling,3
+Odisha,inferred_from_place_name,2
+Kerala,inferred_from_place_name,2
+Chandigarh,verified_name_format,2
+Puducherry,verified_name_format,2
+Chikhali,review_required,1
+Andaman,verified_name_format,1
+Andhra Pradesh,inferred_from_place_name,1
+Kerala,corrected_spelling,1
+Haryana,inferred_from_place_name,1
+Gujarat,inferred_from_place_name,1
+Haryana,corrected_spelling,1
+Sikkim,verified_name_format,1
+Puducherry,corrected_spelling,1
+Tripura,verified_name_format,1
+Telangana,inferred_from_place_name,1

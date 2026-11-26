@@ -1,0 +1,2 @@
+name,state,city,address,latitude,longitude,type,state_original,state_normalized,state_cleaned,state_mapping_status
+GJ | Chikhali | Chikhli - Hotel Empire,Chikhali,Gujarat,"Hotel Empire, PO- Rola, Via- Dungri, NH-8, Gujarat 396375",20.6909,72.9496,24.0,Chikhali,chikhali,Chikhali,review_required

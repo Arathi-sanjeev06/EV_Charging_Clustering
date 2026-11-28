@@ -87,6 +87,7 @@ for k in range(2, 11):
     comparison_results.append({
         "K": k,
         "KMeans_Silhouette": kmeans_silhouette,
+        "KMeans_Inertia": kmeans.inertia_,
         "Ward_Silhouette": ward_silhouette
     })
 
@@ -298,19 +299,20 @@ plt.close()
 
 plt.figure(figsize=(9, 7))
 
-scatter = plt.scatter(
-    df["longitude"],
-    df["latitude"],
-    c=df["kmeans_cluster"],
-    cmap="tab10",
-    s=18,
-    alpha=0.75
-)
+for cluster_id in sorted(df["kmeans_cluster"].unique()):
+    mask = df["kmeans_cluster"] == cluster_id
+    plt.scatter(
+        df.loc[mask, "longitude"],
+        df.loc[mask, "latitude"],
+        s=18,
+        alpha=0.75,
+        label=f"Cluster {cluster_id}"
+    )
 
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.title("Geographical Clusters of EV Charging Stations (K=5)")
-plt.colorbar(scatter, label="Cluster")
+plt.legend()
 plt.grid(True, alpha=0.2)
 plt.tight_layout()
 

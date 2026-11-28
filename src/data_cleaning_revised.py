@@ -65,10 +65,11 @@ valid_coordinates = (
     & df["longitude"].between(68, 98)
 )
 
+valid_coordinates = valid_coordinates.fillna(False).astype(bool)
 invalid_coordinates = ~valid_coordinates
 
 missing_count = int(missing_coordinates.sum())
-invalid_count = int(invalid_coordinates.sum())
+invalid_count = int((invalid_coordinates & ~missing_coordinates).sum())
 
 # Save excluded records separately for transparency
 excluded = df[invalid_coordinates].copy()

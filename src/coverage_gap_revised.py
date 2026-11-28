@@ -78,40 +78,7 @@ station_summary.to_csv(
     index=False
 )
 
-# ------------------------------------------------
-# 2. STATE-WISE SUMMARY
-# IMPORTANT: nearest station can be in another state.
-# ------------------------------------------------
-
-state_summary = (
-    df.groupby("state")
-    .agg(
-        Station_Count=("name", "count"),
-        Mean_Nearest_Distance_KM=(
-            "nearest_station_distance_km", "mean"
-        ),
-        Median_Nearest_Distance_KM=(
-            "nearest_station_distance_km", "median"
-        ),
-        Maximum_Nearest_Distance_KM=(
-            "nearest_station_distance_km", "max"
-        ),
-        Stations_Over_25_KM=(
-            "nearest_station_distance_km",
-            lambda x: int((x > DISTANCE_THRESHOLD_KM).sum())
-        )
-    )
-    .reset_index()
-    .sort_values(
-        "Mean_Nearest_Distance_KM",
-        ascending=False
-    )
-)
-
-state_summary.to_csv(
-    OUTPUT_DIR / "state_nearest_distance_revised.csv",
-    index=False
-)
+# State-wise summary: see state_coverage_summary_final.py (uses cleaned state labels)
 
 # ------------------------------------------------
 # 3. GRID-BASED COVERAGE GAP ESTIMATE
@@ -237,8 +204,6 @@ plt.close()
 print("\n========== STATION DISTANCE SUMMARY ==========")
 print(station_summary.to_string(index=False))
 
-print("\n========== STATE-WISE SUMMARY ==========")
-print(state_summary.head(15).to_string(index=False))
 
 print("\n========== GRID COVERAGE SUMMARY ==========")
 print(coverage_summary.to_string(index=False))

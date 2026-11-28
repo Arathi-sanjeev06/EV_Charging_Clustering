@@ -5,8 +5,9 @@ representation of latitude/longitude, plus Haversine nearest-station distance an
 Author: Arathi Sanjeev (Roll no. 24020570009), University of Delhi.
 
 ## Data
-- Source: Kaggle dataset "Electric Vehicle Charging Stations in India" (author: saketpradhan).
-  Title/URL: **[add exact title and URL]**, licence: **[add, as stated on the Kaggle page]**, accessed: **[add date]**.
+- Source: Kaggle dataset "Electric Vehicle Charging Stations in India" by saketpradhan.
+  URL: https://www.kaggle.com/datasets/saketpradhan/electric-vehicle-charging-stations-in-india
+  Licence: CC0 1.0 Public Domain (https://creativecommons.org/publicdomain/zero/1.0/). Accessed: 28 November 2026.
 - `data/ev.csv` - raw file (1,547 rows, 7 columns: name, state, city, address, lattitude, longitude, type).
 - `data/cleaned_ev_stations_revised.csv` - cleaned file produced by `src/data_cleaning_revised.py` (1,334 rows).
 - `data/excluded_invalid_coordinates.csv` - records removed for missing or out-of-range coordinates.
